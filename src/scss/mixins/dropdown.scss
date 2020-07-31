@@ -1,0 +1,40 @@
+@mixin dropdownContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  background-color: #b8c6cd;
+  color: #70757a;
+  padding: 5px;
+
+  i {
+    cursor: pointer;
+  }
+}
+
+@mixin dropdownOptions {
+  margin: 2.5px 0;
+  padding: 5px 0;
+  background: #fff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 5px;
+  border: 1px solid #cbcccb;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    max-height: 200px;
+    overflow-y: scroll;
+
+    li {
+      padding: 7.5px 15px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #e6f4fb;
+      }
+    }
+  }
+}
