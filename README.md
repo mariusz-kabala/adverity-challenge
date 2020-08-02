@@ -4,8 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Project requirements are described here [challenge.pdf](https://raw.githubusercontent.com/mariusz-kabala/adverity-challenge/master/challenge.pdf). 
 
-Customizations - in my implementation user is able to upload any CVS file and deside how to visualize the data there. 
-First user has to upload cvs file or use the example file from the challenge. Then cvs fields need to be setup. User has to define which field contains time, which one dimentions and which metrics. After that app is good to go, and chart can be generated.
+Customizations - in my implementation user is able to upload any CSV file and deside how to visualize the data there. 
+First user has to upload csv file or use the example file from the challenge. Then csv fields need to be setup. User has to define which field contains time, which one dimentions and which metrics. After that app is good to go, and chart can be generated.
 
 ## Design assumptions
 
@@ -28,7 +28,7 @@ I tried to add as little dependencies as possible. For production ready solution
 ## Potential impromevents
 - better design (sorry I'm not a designer), support mobile 
 - allow user to choose date format in csv file
-- allow user to setup cvs field separator - now only comma separator is supported
+- allow user to setup csv field separator - now only comma separator is supported
 - implement lazy loading in `<MultiSelectDropdown />` component - right now if field has many values (like for example `Campaign` field in the example data) application is loosing frames when the list of values is being displayed
 - use events (by reusing EventTarget interface) instead of callbacks in `readFileByChunk`
 - introduce data validation layer
