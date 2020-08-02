@@ -6,9 +6,15 @@ import { Button } from "components/Button";
 import { useSetup } from "hooks";
 import styles from "./styles.module.scss";
 
-export const Setup: FC<{goNext: () => void}> = ({goNext}) => {
-  const { updateTime, updateDimensions, updateMetrics, setup } = useSetup();
-  
+export const Setup: FC<{ goNext: () => void }> = ({ goNext }) => {
+  const {
+    updateTime,
+    updateDimensions,
+    updateMetrics,
+    loadDefaultSetup,
+    setup,
+  } = useSetup();
+
   const options = useMemo(
     () => setup.availableOptions.map((field) => field.label),
     [setup]
@@ -18,7 +24,7 @@ export const Setup: FC<{goNext: () => void}> = ({goNext}) => {
       const field = setup.allOptions.find((o) => o.label === value);
 
       if (field) {
-        updateDimensions([field, ...setup.dimensions]);
+        updateDimensions([...setup.dimensions, field]);
       }
     },
     [setup, updateDimensions]
@@ -40,7 +46,7 @@ export const Setup: FC<{goNext: () => void}> = ({goNext}) => {
       const field = setup.allOptions.find((o) => o.label === value);
 
       if (field) {
-        updateMetrics([...setup.metrics, field]);
+        updateMetrics([field, ...setup.metrics]);
       }
     },
     [setup, updateMetrics]
@@ -70,8 +76,13 @@ export const Setup: FC<{goNext: () => void}> = ({goNext}) => {
   );
 
   const isReady = useMemo(() => {
-    return setup.time && setup.timeRange.length === 2 && setup.dimensions.length > 0 && setup.metrics.length > 0
-  }, [setup])
+    return (
+      setup.time &&
+      setup.timeRange.length === 2 &&
+      setup.dimensions.length > 0 &&
+      setup.metrics.length > 0
+    );
+  }, [setup]);
 
   return (
     <div className={styles.wrapper}>
@@ -104,11 +115,10 @@ export const Setup: FC<{goNext: () => void}> = ({goNext}) => {
         />
       </div>
 
-      {isReady && (
-        <div className={cx(styles.item, styles.next)}>
-          <Button label={"GO next"} onClick={goNext} />
-        </div>
-      )}
+      <div className={cx(styles.item, styles.next)}>
+        <Button label={"Load default config"} onClick={loadDefaultSetup} />
+        {isReady && <Button label={"GO next"} onClick={goNext} />}
+      </div>
     </div>
   );
 };

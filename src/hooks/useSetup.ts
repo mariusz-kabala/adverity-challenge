@@ -64,8 +64,8 @@ export const useSetup = () => {
 
       changer((value: ISetupContext) => ({
         ...value,
-        timeRange: [new Date(minDate), new Date(maxDate)]
-      }))
+        timeRange: [new Date(minDate), new Date(maxDate)],
+      }));
     })();
   }, [setup.dateFormat, setup.time, data.data, changer]);
 
@@ -82,11 +82,10 @@ export const useSetup = () => {
 
   const updateDimensions = useCallback(
     (dimensions: ICsvField[]) => {
-      const toApply = dimensions.slice(0, 2);
       changer({
         ...setup,
-        dimensions: toApply,
-        availableOptions: getAvailableOptions(setup, toApply, "dimensions"),
+        dimensions,
+        availableOptions: getAvailableOptions(setup, dimensions, "dimensions"),
       });
     },
     [setup, changer]
@@ -94,10 +93,11 @@ export const useSetup = () => {
 
   const updateMetrics = useCallback(
     (metrics: ICsvField[]) => {
+      const toApply = metrics.slice(0, 2);
       changer({
         ...setup,
-        metrics,
-        availableOptions: getAvailableOptions(setup, metrics, "metrics"),
+        metrics: toApply,
+        availableOptions: getAvailableOptions(setup, toApply, "metrics"),
       });
     },
     [setup, changer]
@@ -105,7 +105,7 @@ export const useSetup = () => {
 
   const updateOptions = useCallback(
     (values: ICsvField[]) => {
-      changer(value => ({
+      changer((value) => ({
         ...value,
         time: null,
         dimensions: [],
@@ -117,11 +117,43 @@ export const useSetup = () => {
     [changer]
   );
 
+  const loadDefaultSetup = useCallback(() => {
+    changer((setup) => ({
+      ...setup,
+      metrics: [
+        {
+          label: "Clicks",
+          index: 1,
+        },
+        {
+          label: "Impressions",
+          index: 2,
+        },
+      ],
+      time: {
+        label: "Date",
+        index: 0,
+      },
+      dimensions: [
+        {
+          label: "Campaign",
+          index: 3,
+        },
+        {
+          label: "Datasource",
+          index: 4,
+        },
+      ],
+      availableOptions: [],
+    }));
+  }, [changer]);
+
   return {
     updateTime,
     updateDimensions,
     updateMetrics,
     updateOptions,
+    loadDefaultSetup,
     setup,
   };
 };

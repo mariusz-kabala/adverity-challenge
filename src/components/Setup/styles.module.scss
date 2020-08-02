@@ -11,4 +11,10 @@
 .next {
     margin-top: 15px;
     text-align: center;
+
+    button {
+        &:first-child {
+            margin-right: 10px;
+        }
+    }
 }
