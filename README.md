@@ -26,6 +26,7 @@ I tried to add as little dependencies as possible. For production ready solution
 - In order to use web workers I added [workerize-loader](https://github.com/developit/workerize-loader) and to incorporate it into CRA setup I used [react-app-rewired](https://www.npmjs.com/package/react-app-rewired)
 
 ## Potential impromevents
+- better design (sorry I'm not a designer), support mobile 
 - allow user to choose date format in csv file
 - allow user to setup cvs field separator - now only comma separator is supported
 - implement lazy loading in `<MultiSelectDropdown />` component - right now if field has many values (like for example `Campaign` field in the example data) application is loosing frames when the list of values is being displayed
