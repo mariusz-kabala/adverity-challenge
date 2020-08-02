@@ -1,0 +1,15 @@
+@import 'scss/index.scss';
+
+.wrapper {
+
+    position: relative;
+    
+
+    input[type=file] {
+        display: none;
+    }
+}
+
+.spinner {
+    @include centered();
+}

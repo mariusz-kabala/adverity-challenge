@@ -1,0 +1,9 @@
+@import 'scss/index.scss';
+
+.wrapper {
+    position: relative;
+}
+
+.spinner {
+    @include centered();
+}

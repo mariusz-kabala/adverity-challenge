@@ -6,7 +6,7 @@ export const useFilters = () => {
   const applyFilter = useContext(ApplyFilterContext);
   const getAppliedFilters = useCallback(
     (filter: string) => {
-      return filters[filter] || [];
+      return filters.applied[filter] || [];
     },
     [filters]
   );
@@ -30,9 +30,15 @@ export const useFilters = () => {
     }
   };
 
+  const changeTimeRange = useCallback((timeRange: Date[]) => {
+    applyFilter('timeRange', timeRange)
+  }, [applyFilter])
+
   return {
     getAppliedFilters,
     getAddFilterValue,
     getRemoveFilterValue,
+    changeTimeRange,
+    ...filters
   };
 };

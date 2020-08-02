@@ -1,0 +1,23 @@
+@import 'scss/index.scss';
+
+.wrapper {
+    z-index: 1;
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    background: #fff;
+    padding: 1.5%;
+    overflow-y: auto;
+    border-radius: 8px;
+    @include centered();
+    @include shadow();
+}
+
+.confirmation {
+    margin-top: 20px;
+    text-align: center;
+    button {
+        background-color: red;
+        color: white;
+    }
+}

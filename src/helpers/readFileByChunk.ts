@@ -5,7 +5,7 @@ export const readFileByChunk = ({
   onEnd,
   chunkSize = 64 * 1024,
 }: {
-  file: File;
+  file: File | Blob;
   chunkSize?: number;
   onChunk: (chunk: string) => void;
   onEnd: () => void;

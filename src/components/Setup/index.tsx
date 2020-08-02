@@ -1,11 +1,14 @@
 import React, { FC, useCallback, useMemo } from "react";
+import cx from "classnames";
 import { MultiSelectDropdown } from "components/MultiSelectDropdown";
 import { Dropdown } from "components/Dropdown";
 import { Button } from "components/Button";
 import { useSetup } from "hooks";
+import styles from "./styles.module.scss";
 
-export const Setup: FC = () => {
+export const Setup: FC<{goNext: () => void}> = ({goNext}) => {
   const { updateTime, updateDimensions, updateMetrics, setup } = useSetup();
+  
   const options = useMemo(
     () => setup.availableOptions.map((field) => field.label),
     [setup]
@@ -66,15 +69,14 @@ export const Setup: FC = () => {
     [setup, updateTime]
   );
 
-  const canApply = useMemo(
-    () => setup.time && setup.dimensions.length > 0 && setup.metrics.length > 0,
-    [setup]
-  );
+  const isReady = useMemo(() => {
+    return setup.time && setup.timeRange.length === 2 && setup.dimensions.length > 0 && setup.metrics.length > 0
+  }, [setup])
 
   return (
-    <div>
-      <div>
-        <h3>Time</h3>
+    <div className={styles.wrapper}>
+      <div className={styles.item}>
+        <h3>Time:</h3>
         <Dropdown
           options={options}
           selected={setup.time?.label}
@@ -82,8 +84,8 @@ export const Setup: FC = () => {
         />
       </div>
 
-      <div>
-        <h3>Dimensions</h3>
+      <div className={styles.item}>
+        <h3>Dimensions:</h3>
         <MultiSelectDropdown
           onAdd={onDimensionAdd}
           onRemove={onDimensionRemove}
@@ -92,8 +94,8 @@ export const Setup: FC = () => {
         />
       </div>
 
-      <div>
-        <h3>Metrics</h3>
+      <div className={styles.item}>
+        <h3>Metrics:</h3>
         <MultiSelectDropdown
           onAdd={onMetricAdd}
           onRemove={onMetricRemove}
@@ -102,7 +104,11 @@ export const Setup: FC = () => {
         />
       </div>
 
-      {canApply && <Button label={"Apply setup"} onClick={() => null} />}
+      {isReady && (
+        <div className={cx(styles.item, styles.next)}>
+          <Button label={"GO next"} onClick={goNext} />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,47 @@
+@import 'scss/index.scss';
+
+.wrapper {
+    background-color: $bgColor;
+    @include shadow();
+    display: flex;
+    border-radius: 8px;
+    color: $txtColor;
+    min-height: 650px;
+    position: relative;
+    padding: 15px;
+    padding-bottom: 50px;
+}
+
+.navigation {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 5px;
+
+    li {
+        display: inline-block;
+        margin: 0 5px;
+        a {
+            cursor: pointer;
+            display: block;
+            height: 15px;
+            width: 15px;
+            background-color: #b2f7ef;
+            border-radius: 50%;
+        }
+
+        &.disabled {
+            a {
+                background-color: #eff7f6;
+            }
+        }
+
+        &.current {
+            a {
+                background-color: #f2b5d4;
+            }
+        }
+    }
+}

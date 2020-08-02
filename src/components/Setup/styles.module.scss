@@ -1,0 +1,14 @@
+@import 'scss/index.scss';
+
+.item {
+    @include item();
+}
+
+.wrapper {
+    @include wrapper();
+}
+
+.next {
+    margin-top: 15px;
+    text-align: center;
+}

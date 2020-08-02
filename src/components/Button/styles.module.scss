@@ -1,0 +1,11 @@
+@import 'scss/index.scss';
+
+.wrapper {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: $currentColor;
+    color: $bgColor;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+}

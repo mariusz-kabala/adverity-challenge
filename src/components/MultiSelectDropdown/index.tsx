@@ -33,10 +33,10 @@ export const MultiSelectDropdown: FC<{
           {!isOpen && <IoIosArrowUp />}
         </i>
       </div>
-      {isOpen && (
+      {isOpen && options.length > 0 && (
         <div className={styles.options}>
           {isSearchEnabled && (
-            <div>
+            <div className={styles.search}>
               <input type="text" value={query} onChange={(e) => {
                 setQuery(e.target.value)
               }} />

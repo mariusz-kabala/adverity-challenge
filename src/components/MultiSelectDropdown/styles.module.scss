@@ -14,7 +14,8 @@
 
     li {
       padding: 2.5px 10px 2.5px 0px;
-      background-color: #e6f4fb;
+      background-color: $txtColor;
+      color: $bgColor;
       border-radius: 7.5px;
       margin: 2.5px;
       display: flex;
@@ -24,6 +25,7 @@
       align-content: center;
       i {
         position: relative;
+        color: red;
         top: 2px;
         svg {
           width: 1.5em;
@@ -35,4 +37,15 @@
 }
 .options {
   @include dropdownOptions();
+}
+
+.search {
+  input {
+    padding: 5px;
+    border: 1px solid $bgColor;
+    border-radius: 5px;
+    display: block;
+    width: 95%;
+    margin: 0 auto 5px auto;
+  }
 }

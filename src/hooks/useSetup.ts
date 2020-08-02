@@ -1,6 +1,13 @@
-import { useContext, useCallback } from "react";
-import { SetupContext, SetupChangerContext, ISetupContext } from "context";
+import { useContext, useCallback, useEffect, useRef } from "react";
+import {
+  SetupContext,
+  SetupChangerContext,
+  ISetupContext,
+  DataContext,
+} from "context";
 import { ICsvField } from "types/csvField";
+import { createWorker, WorkerType } from "workers/createWorker";
+import * as timeRange from "workers/timeRange.worker";
 
 const getAvailableOptions = (
   setup: ISetupContext,
@@ -37,6 +44,30 @@ const getAvailableOptions = (
 export const useSetup = () => {
   const setup = useContext(SetupContext);
   const changer = useContext(SetupChangerContext);
+  const data = useContext(DataContext);
+
+  const timeRangeInstance = useRef<WorkerType<typeof timeRange>>(
+    createWorker(timeRange)
+  );
+
+  useEffect(() => {
+    if (!setup.dateFormat || setup.time === null || data.data.length === 0) {
+      return;
+    }
+
+    (async () => {
+      const [minDate, maxDate] = await timeRangeInstance.current.findTimeRange(
+        data.data,
+        setup.time?.label as string,
+        setup.dateFormat as string
+      );
+
+      changer((value: ISetupContext) => ({
+        ...value,
+        timeRange: [new Date(minDate), new Date(maxDate)]
+      }))
+    })();
+  }, [setup.dateFormat, setup.time, data.data, changer]);
 
   const updateTime = useCallback(
     (time: ICsvField) => {
@@ -74,13 +105,14 @@ export const useSetup = () => {
 
   const updateOptions = useCallback(
     (values: ICsvField[]) => {
-      changer({
+      changer(value => ({
+        ...value,
         time: null,
         dimensions: [],
         metrics: [],
         allOptions: [...values],
         availableOptions: [...values],
-      });
+      }));
     },
     [changer]
   );

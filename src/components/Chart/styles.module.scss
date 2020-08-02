@@ -1,0 +1,17 @@
+@import 'scss/index.scss';
+
+.wrapper {
+    @include shadow();
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    p {
+        @include centered();
+    }
+}
+
+.spinner {
+    @include centered();
+}

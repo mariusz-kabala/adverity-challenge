@@ -1,0 +1,14 @@
+@import 'scss/index.scss';
+
+.wrapper {
+    p {
+        text-align: center;
+    }
+}
+.content {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
