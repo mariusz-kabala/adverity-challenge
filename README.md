@@ -7,6 +7,21 @@ Project requirements are described here [challenge.pdf](https://raw.githubuserco
 Customizations - in my implementation user is able to upload any CSV file and deside how to visualize the data there. 
 First user has to upload csv file or use the example file from the challenge. Then csv fields need to be setup. User has to define which field contains time, which one dimentions and which metrics. After that app is good to go, and chart can be generated.
 
+## Running the project
+
+- start dev mode
+
+```bash
+yarn start
+```
+
+- run unit tests:
+
+```bash
+yarn test
+```
+
+
 ## Design assumptions
 
 ### Keep it simple, react based
@@ -32,3 +47,4 @@ I tried to add as little dependencies as possible. For production ready solution
 - implement lazy loading in `<MultiSelectDropdown />` component - right now if field has many values (like for example `Campaign` field in the example data) application is loosing frames when the list of values is being displayed
 - use events (by reusing EventTarget interface) instead of callbacks in `readFileByChunk`
 - introduce data validation layer
+- better test coverage
