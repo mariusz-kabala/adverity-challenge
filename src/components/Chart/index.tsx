@@ -44,7 +44,7 @@ export const Chart: FC = () => {
             <XAxis
               key={`x-${x.dataKey}`}
               dataKey={x.dataKey}
-              orientation={x.orientation as "bottom"}
+              orientation={x.orientation}
             />
           ))}
           {yAxis.map((y) => (
@@ -53,14 +53,14 @@ export const Chart: FC = () => {
               dataKey={y.dataKey}
               yAxisId={y.dataKey}
               tickFormatter={nFormatter}
-              orientation={y.orientation as "left"}
+              orientation={y.orientation}
             />
           ))}
           {lines.map((line) => (
             <Line
               key={`line-${line.dataKey}`}
               yAxisId={line.dataKey}
-              type={line.type as "monotone"}
+              type={line.type}
               dataKey={line.dataKey}
               stroke={line.stroke}
             />

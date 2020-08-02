@@ -7,21 +7,41 @@ import {
 } from "context";
 import { createWorker, WorkerType } from "workers/createWorker";
 import * as aggregator from "workers/dataAggregator.worker";
-import { getRandomColor } from "helpers"
+import { getRandomColor } from "helpers";
 
 const yAxisOrientation = ["left", "right"];
-const colors = new Array(10).fill(null).map(getRandomColor)
+const colors = new Array(10).fill(null).map(getRandomColor);
 
-export const useChart = () => {
+export interface IChartState {
+  isReady: boolean;
+  isLoading: boolean;
+  data: {
+    [field: string]: string | number;
+  }[];
+}
+
+export interface IUseChart extends IChartState {
+  xAxis: {
+    orientation: "bottom" | "top";
+    dataKey: string;
+  }[];
+  yAxis: {
+    orientation: "left" | "right";
+    dataKey: string;
+  }[];
+  lines: {
+    stroke: string;
+    dataKey: string;
+    type: "monotone";
+  }[];
+}
+
+export const useChart = (): IUseChart => {
   const { data } = useContext<IDataContext>(DataContext);
   const filters = useContext(FiltersContext);
   const setup = useContext(SetupContext);
   const metrics = setup.metrics.slice(0, 2);
-  const [state, setState] = useState<{
-    isReady: boolean;
-    isLoading: boolean;
-    data: any;
-  }>({
+  const [state, setState] = useState<IChartState>({
     isReady: false,
     isLoading: false,
     data: [],
@@ -36,7 +56,7 @@ export const useChart = () => {
       !setup.dateFormat ||
       setup.dimensions.length === 0 ||
       setup.metrics.length === 0 ||
-      filters.timeRange.filter(time => time !== null).length !== 2
+      filters.timeRange.filter((time) => time !== null).length !== 2
     ) {
       return setState({
         isLoading: false,
@@ -74,11 +94,11 @@ export const useChart = () => {
     xAxis: [
       {
         orientation: "bottom",
-        dataKey: setup.time?.label,
+        dataKey: setup.time?.label || '',
       },
     ],
     yAxis: metrics.map((field, index) => ({
-      orientation: yAxisOrientation[index],
+      orientation: yAxisOrientation[index] as "left" | "right",
       dataKey: field.label,
     })),
     lines: metrics.map((metric, index) => ({
@@ -86,6 +106,6 @@ export const useChart = () => {
       dataKey: metric.label,
       type: "monotone",
     })),
-    ...state
+    ...state,
   };
 };
