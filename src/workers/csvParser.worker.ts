@@ -12,8 +12,8 @@ export const csvParser = (csv: string) => {
     if (line === "") {
       continue;
     }
-    result.push(line.split(","));
+    result.push(line.split(",").map((txt) => txt.trim()));
   }
 
-  return result
+  return result;
 };

@@ -5,7 +5,7 @@ export const DropdownOptions: FC<{
   onAdd: (value: string) => void;
 }> = memo(({ options, onAdd }) => {
   return (
-    <ul>
+    <ul data-testid="dropdown-options">
       {options.map((o) => (
         <li onClick={() => onAdd(o)} key={`option-${o}`}>
           {o}

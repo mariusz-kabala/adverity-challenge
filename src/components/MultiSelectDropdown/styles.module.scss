@@ -16,13 +16,19 @@
       padding: 2.5px 10px 2.5px 0px;
       background-color: $txtColor;
       color: $bgColor;
-      border-radius: 7.5px;
+      border-radius: 8px;
       margin: 2.5px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
       align-content: center;
+
+      &.placeholder {
+        background: none;
+        color: $txtColor;
+      }
+
       i {
         position: relative;
         color: red;

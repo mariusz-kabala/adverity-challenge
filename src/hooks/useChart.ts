@@ -7,8 +7,10 @@ import {
 } from "context";
 import { createWorker, WorkerType } from "workers/createWorker";
 import * as aggregator from "workers/dataAggregator.worker";
+import { getRandomColor } from "helpers"
 
 const yAxisOrientation = ["left", "right"];
+const colors = new Array(10).fill(null).map(getRandomColor)
 
 export const useChart = () => {
   const { data } = useContext<IDataContext>(DataContext);
@@ -79,8 +81,8 @@ export const useChart = () => {
       orientation: yAxisOrientation[index],
       dataKey: field.label,
     })),
-    lines: metrics.map((metric) => ({
-      stroke: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    lines: metrics.map((metric, index) => ({
+      stroke: colors[index] ?? getRandomColor(),
       dataKey: metric.label,
       type: "monotone",
     })),

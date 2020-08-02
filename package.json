@@ -1,12 +1,16 @@
 {
-  "name": "etlv",
+  "name": "adverity-challenge",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Mariusz Kabala",
+    "email": "mariusz@kabala.waw.pl"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
+    "@testing-library/jest-dom": "^5.11.2",
+    "@testing-library/react": "^10.4.7",
+    "@testing-library/user-event": "^12.1.0",
+    "@types/jest": "^26.0.8",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
@@ -24,7 +28,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "test": "react-app-rewired test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,6 +50,7 @@
     "@types/classnames": "^2.2.10",
     "@types/react-datepicker": "^3.1.0",
     "@types/recharts": "^1.8.14",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
     "node-sass": "^4.14.1",
     "raw.macro": "^0.4.1",
     "react-app-rewired": "^2.1.6",

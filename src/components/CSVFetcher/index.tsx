@@ -27,14 +27,12 @@ export const CSVFetcher: FC = () => {
           onError: () => {
             terminate();
           },
-          onEnd: () => {
-            finish();
-          },
+          onEnd: finish,
         });
       });
   }, [finish, parse, terminate]);
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="csv-fetcher">
       {!(isFetching || isLoading) && (
         <Button label="Fetch example data" onClick={fetchData} />
       )}

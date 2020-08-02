@@ -7,8 +7,9 @@ import styles from "./styles.module.scss";
 export const Dropdown: FC<{
   options: string[];
   selected?: string;
+  placeholder?: string
   onSelect: (value: string) => void;
-}> = ({ options, selected, onSelect }) => {
+}> = ({ options, selected, onSelect, placeholder = 'Select a value' }) => {
   const { isOpen, wrapperRef, toggle } = useDropdown();
 
   const onAdd = useCallback((value) => {
@@ -17,9 +18,9 @@ export const Dropdown: FC<{
   }, [onSelect, toggle])
 
   return (
-    <div ref={wrapperRef}>
+    <div data-testid="dropdown" ref={wrapperRef}>
       <div className={styles.content} onClick={toggle}>
-        <span>{selected || "Select a value"}</span>
+        <span>{selected || placeholder}</span>
         <i onClick={toggle}>
           {isOpen && <IoIosArrowDown />}
           {!isOpen && <IoIosArrowUp />}

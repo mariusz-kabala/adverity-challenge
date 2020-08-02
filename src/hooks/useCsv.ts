@@ -4,26 +4,7 @@ import * as dataFormatter from "workers/dataFormatter.worker";
 import { createWorker, WorkerType } from "workers/createWorker";
 import { DataChangerContext, IDataChangerContext } from "context";
 import { useRef, useContext, useState } from "react";
-
-class ChunkStatus {
-  public chunks: boolean[];
-
-  constructor() {
-    this.chunks = [];
-  }
-
-  public registerChunk() {
-    return this.chunks.push(false) - 1;
-  }
-
-  public markAsReady(index: number) {
-    this.chunks[index] = true;
-  }
-
-  public isReady() {
-    return !this.chunks.some((value) => value === false);
-  }
-}
+import { ChunkStatus } from "helpers";
 
 export const useCsv = () => {
   const csvParserInstance = useRef<WorkerType<typeof csvParser>>(
@@ -44,7 +25,7 @@ export const useCsv = () => {
   return {
     isLoading,
     parse: async (csv: string) => {
-      setIsLoading(true)
+      setIsLoading(true);
 
       const index = status.current.registerChunk();
       const parsed = await csvParserInstance.current.csvParser(csv);
@@ -67,7 +48,7 @@ export const useCsv = () => {
       };
 
       if (status.current.isReady()) {
-        setIsLoading(false)
+        setIsLoading(false);
         return onReady();
       }
 
@@ -80,7 +61,7 @@ export const useCsv = () => {
           clearInterval(finishInterval.current);
         }
 
-        setIsLoading(false)
+        setIsLoading(false);
         onReady();
       }, 100);
     },
