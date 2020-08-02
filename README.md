@@ -21,6 +21,23 @@ yarn start
 yarn test
 ```
 
+## Dockerization
+
+App is dockerized, to use it:
+
+- build the container
+
+```bash
+docker build -t challenge .
+```
+
+- run the container 
+
+```bash
+docker run -p 8080:80 challenge
+```
+
+- open http://localhost:8080/
 
 ## Design assumptions
 
