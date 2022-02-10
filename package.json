@@ -51,7 +51,7 @@
     "@types/react-datepicker": "^3.1.0",
     "@types/recharts": "^1.8.14",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "raw.macro": "^0.4.1",
     "react-app-rewired": "^2.1.6",
     "ts-loader": "^8.0.1",
